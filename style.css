@@ -1,0 +1,163 @@
+:root{
+  --bg-grad-top: rgb(255, 137, 137);
+  --bg-grad-bottom: rgba(255, 234, 221, 0.7);
+  --pill-bg: rgb(252, 174, 174);
+  --text-on-pink: rgb(255, 234, 221);
+  --shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body { font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+
+/* BACKGROUND VIDEO */
+.backvideo{
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.overlay{
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(var(--bg-grad-top), var(--bg-grad-bottom));
+  z-index: -1;
+}
+
+/* HEADER */
+.site-header{
+  display: flex;
+  justify-content: center;
+  padding: clamp(8px, 2vw, 20px);
+}
+.logo{
+  width: clamp(40px, 8vw, 80px);
+  height: auto;
+}
+
+/* MAIN WRAPPER */
+.wrapper{
+  min-height: calc(100dvh - 100px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 4vw, 40px);
+}
+
+/* CONTENT */
+.content{
+  width: min(100%, 980px);
+  display: grid;
+  gap: clamp(16px, 3vw, 32px);
+  text-align: center;
+}
+.content h1{
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  font-size: clamp(1.6rem, 4.5vw, 3rem);
+  transition: -webkit-text-stroke 0.3s, color 0.3s;
+}
+.content h1:hover{
+  -webkit-text-stroke: 1.5px #fff;
+  color: transparent;
+}
+
+/* CARD */
+.card{
+  backdrop-filter: blur(4px);
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: clamp(16px, 4vw, 32px);
+  box-shadow: var(--shadow);
+}
+
+/* RESULT (space reserved, responsive size) */
+.result{
+  color: var(--text-on-pink);
+  font-weight: 800;
+  font-size: clamp(2.5rem, 12vw, 7rem);
+  line-height: 1;
+  min-height: 1em;           /* prevents layout shift */
+  display: grid;
+  place-items: center;
+  margin-bottom: clamp(12px, 2.5vw, 20px);
+}
+
+/* FORM LAYOUT: grid that stacks on mobile and becomes 3 columns on wider screens */
+.form{
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  gap: clamp(12px, 2.5vw, 20px);
+  grid-template-columns: 1fr;
+}
+
+/* at >= 640px, show input | heart | input in a row */
+@media (min-width: 640px){
+  .form{
+    grid-template-columns: 1fr auto 1fr;
+  }
+}
+
+/* INPUTS + BUTTON */
+.name{
+  width: min(90vw, 360px);
+  height: clamp(44px, 6.5vw, 56px);
+  background-color: var(--pill-bg);
+  border: none;
+  border-radius: 999px;
+  text-transform: uppercase;
+  text-align: center;
+  font-weight: 600;
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  box-shadow: var(--shadow);
+  padding-inline: 1rem;
+}
+.name::placeholder{ color: rgba(0,0,0,0.55); }
+
+.button{
+  grid-column: 1 / -1; /* full width row in grid */
+  height: clamp(44px, 6.5vw, 56px);
+  width: min(60vw, 320px);
+  background-color: var(--pill-bg);
+  border: none;
+  border-radius: 999px;
+  font-weight: 700;
+  text-transform: uppercase;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform .08s ease, opacity .2s ease;
+}
+.button:active{ transform: translateY(1px) scale(0.99); }
+.button:hover{ opacity: 0.95; }
+
+/* HEART IMAGE scales nicely */
+.central_heart{
+  width: clamp(80px, 18vw, 240px);
+  height: auto;
+  display: block;
+}
+
+/* ACCESSIBILITY: reduce motion users get no hover flip */
+@media (prefers-reduced-motion: reduce){
+  .content h1:hover{ -webkit-text-stroke: 0; color: #fff; }
+}
+
+
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: rgb(0, 0, 0);
+}
+.site-footer a {
+  color: rgb(0, 216, 216);
+  text-decoration: none;
+  font-weight: bold;
+}
+.site-footer a:hover {
+  text-decoration: underline;
+}
